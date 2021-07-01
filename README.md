@@ -1,4 +1,4 @@
-Simple game of Rock Paper Scissors made with JavaScript that plays in the console.
+Updated Version of Rock Paper Scissors Game with UI and interactive buttons.
 
 Project assigned by The Odin Project.
 
