@@ -21,14 +21,16 @@ main {
     padding-top: 3rem;
 }
 
-#title {
+.title {
     font-size: 6rem;
     font-weight: 700;
+    margin-bottom: 0;
 }
 
 .title__desc {
     font-size: 4rem;
     text-align: center;
+    margin-top: .2rem;
 }
 
 /* Buttons Styles */
@@ -52,6 +54,7 @@ button:active {
 
 #reset {
     padding: 1.2rem 2.2rem;
+    margin-top: 1rem;
 }
 
 
@@ -66,6 +69,8 @@ button:active {
 #player, #cpu, #output, #result, p {
     font-size: 3.6rem;
     padding: 0rem 2rem;
+    margin-bottom: 0rem;
+    margin-top: 2rem;
 }
 
 /* Mobile View */
@@ -77,9 +82,15 @@ button:active {
     main {
         text-align: center;
     }
+    .title {
+        margin-top: 0rem;
+    }
     #choice__wrapper {
         display: flex;
         flex-direction: column;
+    }
+    #output{
+        font-size: 3.4rem;
     }
     button {
         margin: 1rem 0rem;
