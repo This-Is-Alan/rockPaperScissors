@@ -2,22 +2,21 @@ const pScore = document.getElementById('player');
 const cScore = document.getElementById('cpu');
 const output = document.getElementById('output');
 const result = document.getElementById('result');
-const buttons = document.querySelectorAll('button');
+const buttons = document.querySelectorAll('#choice__wrapper button');
 const reset = document.getElementById('reset');
 
-
-buttons.forEach(button => button.addEventListener('click', game));
-// refresh page to start over
-reset.addEventListener('click',() => location.reload());
- 
-let playerScore = 0;
-let cpuScore = 0;
+const OUTCOMES = {
+  TIE: 0,
+  PLAYER_WIN: 1,
+  CPU_WIN: 2
+};
 const choices = ["rock", "paper", "scissors"];
 
+let playerScore = 0;
+let cpuScore = 0;
 
 // main game function
-function game(e) {
-  const playerChoice = Number(e.target.id);
+function game(playerChoice) {
   const cpuChoice = computerChoice();
   const winner = checkWinner(playerChoice, cpuChoice); //winner logic
   scoreTracker(winner);
@@ -32,33 +31,29 @@ function computerChoice() {
 
 // logic determining winner
 function checkWinner(player, cpu) {
-  let tie = 0;
-  let playerWin = 1;
-  let cpuWin = 2;
-
   if (player === cpu) {
-    return tie;
+    return OUTCOMES.TIE;
   } else if (player === 0 && cpu === 2) {
-    return playerWin;
+    return OUTCOMES.PLAYER_WIN;
   } else if (player === 0 && cpu === 1) {
-    return cpuWin;
+    return OUTCOMES.CPU_WIN;
   } else if (player === 1 && cpu === 0) {
-    return playerWin;
+    return OUTCOMES.PLAYER_WIN;
   } else if (player === 1 && cpu === 2) {
-    return cpuWin;
+    return OUTCOMES.CPU_WIN;
   } else if (player === 2 && cpu === 1) {
-    return playerWin;
+    return OUTCOMES.PLAYER_WIN;
   } else if (player === 2 && cpu === 0) {
-    return cpuWin;
+    return OUTCOMES.CPU_WIN;
   }
 }
 
 // score
 function scoreTracker(winner) {
-  if (winner === 1) {
-    return playerScore++;
-  } else if (winner === 2) {
-    return cpuScore++;
+  if (winner === OUTCOMES.PLAYER_WIN) {
+    playerScore++;
+  } else if (winner === OUTCOMES.CPU_WIN) {
+    cpuScore++;
   }
 }
 
@@ -85,3 +80,11 @@ function endGame() {
     });
   }
 }
+
+buttons.forEach(button => button.addEventListener('click', event => {
+  const playerChoice = Number(event.target.attributes["data-id"].value);
+  game(playerChoice);
+}));
+
+// refresh page to start over
+reset.addEventListener('click', () => location.reload());
